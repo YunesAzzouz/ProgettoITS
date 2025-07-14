@@ -33,7 +33,7 @@
 
 .hero {
   height: 350px;
-  background-image: url("/img/hero-terni.jpg");
+  background-image: url("img-style/hero-terni.jpg");
   background-size: cover;
   background-position: center;
   background-color: rgba(37, 35, 35, 0.75);
