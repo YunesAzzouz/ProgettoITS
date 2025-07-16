@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  
+}
+
+:root {
+  --bg-primary-color:#F7F0E0;
+}
+/*NAVBAR*/
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 20px;
+  background:var(--bg-primary-color);
+  height: 150px;
+}
+
+.nav-links{
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo{
+  height: 140px;
+  width: 150px;
+}
+
+.logo-titolo{
+  display: flex;
+  align-items: center;
+}
+
+a {
+  text-decoration: none; /* Rimuove la sottolineatura di default */
+  color: #60553a; 
+}
+
+
+a :hover{
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/*FOOTER*/
+.footer{
+  display: flex;
+  align-items: center;
+  padding: 30px 20px;
+  background:var(--bg-primary-color);
+  height: 50px;
+  position: sticky;
+}
+
+
+/* MEDIA QUERY*/
+@media screen and(max-width:600px ){
+  .presentazione{
+    display: flex;
+    flex-direction:column;
+  }
+}
