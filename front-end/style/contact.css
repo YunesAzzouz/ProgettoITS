@@ -21,7 +21,7 @@
 .form-controls input, textarea{
     padding: 8px 12px;
     border: none;
-    background-color: #d5d5d5;
+    background-color: var(--bg-forms);
     border-radius: 4px;
 }
 
@@ -34,14 +34,14 @@
     color: white;
 }
 .send-form:hover {
-    background: rgb(113, 90, 63);
+    background: var(--bg-forms-send);
     cursor: pointer;
 }
 
 .send-form{
     margin-top: 20px;
     padding: 10px 15px;
-    background-color: rgb(113, 90, 63);
+    background-color: var(--bg-forms-send);
     cursor: not-allowed;
     opacity: 0.5;
 }

@@ -9,6 +9,8 @@
 
 :root {
   --bg-primary-color:#F7F0E0;
+  --bg-forms: #d5d5d5;
+  --bg-forms-send: #715A3F;
 }
 /*NAVBAR*/
 .navbar {
