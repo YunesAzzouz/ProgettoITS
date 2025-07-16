@@ -10,17 +10,7 @@
 :root {
   --bg-primary-color:#F7F0E0;
 }
-
-.logo{
-  height: 140px;
-  width: 150px;
-}
-
-.logo-titolo{
-  display: flex;
-  align-items: center;
-}
-
+/*NAVBAR*/
 .navbar {
   display: flex;
   align-items: center;
@@ -34,6 +24,29 @@
   display: flex;
   justify-content: space-between;
 }
+
+.logo{
+  height: 140px;
+  width: 150px;
+}
+
+.logo-titolo{
+  display: flex;
+  align-items: center;
+}
+
+a {
+  text-decoration: none; /* Rimuove la sottolineatura di default */
+  color: #60553a; 
+}
+
+
+a :hover{
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/*BODY*/
 
 .hero {
   height: 350px;
@@ -64,33 +77,6 @@
   
 }
 
-.footer{
-  display: flex;
-  align-items: center;
-  padding: 30px 20px;
-  background:var(--bg-primary-color);
-  height: 50px;
-  position: sticky;
-}
-
-@media screen and(max-width:600px ){
-  .presentazione{
-    display: flex;
-    flex-direction:column;
-  }
-}
-
-a {
-  text-decoration: none; /* Rimuove la sottolineatura di default */
-  color: #60553a; 
-}
-
-
-a :hover{
-  cursor: pointer;
-  text-decoration: underline;
-}
-
 .btn-prenota{
   border-color: #b6aa8c;
   border-radius: 3px;
@@ -108,3 +94,21 @@ a :hover{
   
 }
 
+/*FOOTER*/
+.footer{
+  display: flex;
+  align-items: center;
+  padding: 30px 20px;
+  background:var(--bg-primary-color);
+  height: 50px;
+  position: sticky;
+}
+
+
+/* MEDIA QUERY*/
+@media screen and(max-width:600px ){
+  .presentazione{
+    display: flex;
+    flex-direction:column;
+  }
+}
