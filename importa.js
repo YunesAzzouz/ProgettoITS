@@ -11,12 +11,12 @@ async function run() {
     const database = client.db('ProgettoITS');
     const collection = database.collection('ProjectWork');
 
-    // Replace with your API endpoint
+    // Api endpoint 
     const response = await axios.get('https://api.openweathermap.org/data/3.0/onecall?lat=42.334902&lon=12.3833577&exclude={part}&appid=8538788ed3e43a05b6ec6dcbb2c76068');
 
     const data = response.data;
 
-    // Insert data into MongoDB (array or object)
+    // Inserisce i dati nella collection
     if (Array.isArray(data)) {
       await collection.insertMany(data);
     } else {
