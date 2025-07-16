@@ -1,0 +1,46 @@
+
+.hero {
+  height: 350px;
+  background-image: url("img-style/hero-terni.jpg");
+  background-size: cover;
+  background-position: center;
+  background-color: rgba(37, 35, 35, 0.75);
+  background-blend-mode: overlay;
+  text-align: center;
+  align-content: center;
+  color: white;
+  font-style: italic;
+  font-size: large ;
+}
+
+.presentazione{
+  display: flex;
+  justify-content: space-around;
+}
+
+.intro{
+  height: 200px;
+  width: 500px;
+  background: #F7F0E0;
+  border-radius: 4px;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.btn-prenota{
+  border-color: #b6aa8c;
+  border-radius: 3px;
+  background: var(--bg-primary-color);
+  color: black;
+  height: 50px;
+  width: 150px;
+  justify-content: space-between;
+}
+
+.btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
