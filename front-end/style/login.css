@@ -17,6 +17,7 @@
     background: var(--bg-forms-send);
     opacity: 0.5;
     color: white;
+    padding: 7px;
 }
 
 .login input button {
