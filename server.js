@@ -39,7 +39,7 @@ app.post("/register", async (req, res) => {
 
     // Insert into database
     const result = await collection.insertOne(newUser);
-    console.log(`✅ User inserted with _id: ${result.insertedId}`);
+    console.log(`User inserted with _id: ${result.insertedId}`);
 
     res.send("Registrazione completata!");
   } catch (err) {
