@@ -1,67 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrati</title>
-    <link rel="stylesheet" href="style/style.css">
-    <link rel="stylesheet" href="style/registrati.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registrati</title>
+  <link rel="stylesheet" href="style/style.css" />
+  <link rel="stylesheet" href="style/registrati.css" />
 </head>
 <body>
-   <section class="navbar">
+
+  <section class="navbar">
     <div class="logo-titolo">
       <div class="logo">
         <a href="index.html">
           <img class="logo" src="img/logo.jpeg" alt="Logo" />
         </a>
-        <br />
       </div>
       <h1>Booking Restaurant</h1>
     </div>
-      
-      <!--<button class="menu-toggle" onclick="toggleMenu()">
-                <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="feather feather-menu"
-          >
-            <line x1="3" y1="12" x2="21" y2="12" />
-            <line x1="3" y1="6" x2="21" y2="6" />
-            <line x1="3" y1="18" x2="21" y2="18" />
-          </svg>
-      </button>-->
+
     <div class="nav-links">
-        <a href="index.html" alt="Home Page">Home</a>
-        <a href="contact.html" alt="Contact page">Contacts</a>
-        <a href="login.html" alt="Login Page"> Login</a>
+      <a href="index.html" alt="Home Page">Home</a>
+      <a href="contact.html" alt="Contact page">Contacts</a>
+      <a href="login.html" alt="Login Page">Login</a>
     </div>
   </section> 
 
   <section class="registrati">
-    <form class="form_registrati">
-      
+    <form class="form_registrati" id="registrationForm">
       <label>Nome</label>
-      <input type="nome" name="name" id="nome_registrati" placeholder="Nome">
-      
+      <input type="text" name="name" id="nome_registrati" placeholder="Nome" required />
+
       <label>Cognome</label>
-      <input type="cognome" name="cognome" id="cognome_registrati" placeholder="Cognome">
+      <input type="text" name="cognome" id="cognome_registrati" placeholder="Cognome" required />
 
-      <label> E-mail</label>
-      <input type="email" name="email"  id="mail_registrati" placeholder="latuaemail@gmail.com"> 
+      <label>E-mail</label>
+      <input type="email" name="email" id="mail_registrati" placeholder="latuaemail@gmail.com" required />
 
-      <label> Password</label>
-      <input type="password" name="password" id="password_registrati" placeholder="password"> 
+      <label>Password</label>
+      <input type="password" name="password" id="password_registrati" placeholder="password" required />
 
-      <button> Submit</button>
+      <button type="submit">Submit</button>
     </form>
   </section>
 
-<script src="scripts/script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("registrationForm");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById("nome_registrati").value;
+        const cognome = document.getElementById("cognome_registrati").value;
+        const email = document.getElementById("mail_registrati").value;
+        const password = document.getElementById("password_registrati").value;
+
+        try {
+          const res = await fetch("/register", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ name, cognome, email, password })
+          });
+
+          const text = await res.text();
+
+          if (res.ok) {
+            alert("Registrazione completata!");
+            form.reset();
+          } else {
+            alert("Errore: " + text);
+          }
+        } catch (err) {
+          console.error("❌ Network error:", err);
+          alert("Errore di rete.");
+        }
+      });
+    });
+  </script>
 </body>
 </html>
