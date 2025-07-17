@@ -65,6 +65,10 @@ a :hover{
   text-decoration: underline; 
 }
 
+.intro {
+  padding: 15px;
+}
+
 
 /*FOOTER*/
 .footer{

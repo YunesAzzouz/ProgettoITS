@@ -3,18 +3,17 @@
     flex-direction: column;
     padding: 30px 250px;
     margin-top: 10px;
-    
 }
 
 .form_registrati label{
     margin-top: 10px;
-
 }
 
 .form_registrati input{
     background: var(--bg-forms);
     height: 25px;
     border: none;
+    border-radius: 4px;
 }
 
 .form_registrati button{
@@ -22,5 +21,18 @@
     opacity:0.5;
     margin-top: 25px;
     height: 30px;
-    border-radius: 2px;
+    border-radius: 4px;
+    border: none;
+    color: white;
+}
+
+.passaLogin {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.passaLogin a {
+    color: green;
+    opacity: 0.7;
 }

@@ -19,13 +19,36 @@
       <h1>Booking Restaurant</h1>
     </div>
 
+    <button class="menu-toggle" onclick="toggleMenu()">
+      <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="feather feather-menu"
+      >
+      <line x1="3" y1="12" x2="21" y2="12" />
+      <line x1="3" y1="6" x2="21" y2="6" />
+      <line x1="3" y1="18" x2="21" y2="18" />
+      </svg>
+    </button>
+
     <div class="nav-links">
-        <a href="index.html" alt="Home Page">Home</a>
-        <a href="contact.html" alt="Contact page">Contacts</a>
-        <a href="login.html" alt="Login Page"> Login</a>
+        <a href="index.html" alt="Pagina Home">Home</a>
+        <a href="contact.html" alt="Pagina Contatti">Contattaci</a>
+        <a href="login.html" alt="Pagina Login"> Login</a>
+        <a class="active" href="registrati.html" alt="Pagina Registrazione">Registrati</a>
     </div>
   </section> 
 
+  <div class="passaLogin">
+    <h3>
+      Se hai già un account vai al <a href="login.html">Login</a></h3>
+  </div>
   <section class="registrati">
     <form class="form_registrati" id="registrationForm">
       <label>Nome</label>
@@ -40,7 +63,7 @@
       <label>Password</label>
       <input type="password" name="password" id="password_registrati" placeholder="password" required />
 
-      <button type="submit">Submit</button>
+      <button type="submit">Invia</button>
     </form>
   </section>
 
