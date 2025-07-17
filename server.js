@@ -53,3 +53,35 @@ app.post("/register", async (req, res) => {
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
 });
+
+app.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    await client.connect();
+    const database = client.db("ProgettoITS");
+    const collection = database.collection("Utente");
+
+    // Find user by email
+    const user = await collection.findOne({ Email: email });
+
+    if (!user) {
+      return res.status(401).send("Email non registrata.");
+    }
+
+    // Compare password with stored hash
+    const passwordMatch = await bcrypt.compare(password, user.Password);
+
+    if (!passwordMatch) {
+      return res.status(401).send("Password errata.");
+    }
+
+    res.send("Login effettuato con successo!");
+  } catch (err) {
+    console.error("Login error:", err);
+    res.status(500).send("Errore del server.");
+  } finally {
+    await client.close();
+  }
+});
+

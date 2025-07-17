@@ -47,7 +47,7 @@
   
   <!-- LOGIN-->
   <div>
-    <form class="login">
+    <form class="login" id="loginForm">
         <label> E-mail</label>
         <input type="email" name="email"  id="mail_login"> 
         <label> Password</label>
@@ -56,6 +56,42 @@
     </form>
   </div>
 
-<script src="scripts/script.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const loginForm = document.getElementById("loginForm");
+
+    loginForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById("mail_login").value;
+      const password = document.getElementById("password_login").value;
+
+      try {
+        const res = await fetch("/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ email, password })
+        });
+
+        const text = await res.text();
+
+        if (res.ok) {
+          alert("Login effettuato con successo!");
+          loginForm.reset();
+          // Optionally redirect:
+          // window.location.href = "/dashboard.html";
+        } else {
+          alert("Errore: " + text);
+        }
+      } catch (err) {
+        console.error("Network error:", err);
+        alert("Errore di rete.");
+      }
+    });
+  });
+</script>
+
 </body>
 </html>
