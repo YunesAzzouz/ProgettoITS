@@ -28,6 +28,10 @@
   gap: 20px;
 }
 
+.nav-links.active {
+  display: flex;
+}
+
 .logo{
   height: 140px;
   width: 150px;
@@ -49,6 +53,19 @@ a :hover{
   text-decoration: underline;
 }
 
+.menu-toggle {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.active {
+  text-decoration: underline; 
+}
+
+
 /*FOOTER*/
 .footer{
   display: flex;
@@ -61,9 +78,20 @@ a :hover{
 
 
 /* MEDIA QUERY*/
-@media screen and(max-width:600px ){
+@media screen and (max-width:600px ){
   .presentazione{
     display: flex;
     flex-direction:column;
+    gap: 25px;
+    align-items: center;
+  }
+
+  .nav-links{
+    display: none;
+    flex-direction: column;
+  }
+
+  .menu-toggle {
+    display: block;
   }
 }
