@@ -6,6 +6,7 @@
     <title>scegli un ristorante</title>
 
     <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/scelta1.css">
 </head>
 <body>
     <section class="navbar">
@@ -44,6 +45,58 @@
     </div>
   </section>
 
+<form id="scelta">
+  <div class="scelta">
+    <div class="filtro-container">
+      <h3>Scegli il tipo di ristorante</h3>
+      <div class="filtro-opzioni">
+        <label><input type="radio" name="filtro" value="Pizzerie">Pizzerie</label>
+        <label><input type="radio" name="filtro" value="Sushi">Sushi</label>
+        <label><input type="radio" name="filtro" value="Rosticcerie">Rosticcerie</label>
+        <label><input type="radio" name="filtro" value="Fast_Food">Fast Food</label>
+        <label><input type="radio" name="filtro" value="Pesce">Pesce</label>
+        <label><input type="radio" name="filtro" value="Vegetariano">Vegetariano</label>
+        <label><input type="radio" name="filtro" value="Vegano">Vegano</label>
+        <label><input type="radio" name="filtro" value="Gelaterie">Gelaterie</label>
+        <label><input type="radio" name="filtro" value="Streetfood">Streetfood</label>
+      </div>
+    </div>
+
+    <div class="filtro-container">
+      <h3>Allergie e intolleranze</h3>
+      <div class="filtro-opzioni filtro-2">
+        <label><input type="checkbox" name="filtro" value="glutine">Glutine</label>
+        <label><input type="checkbox" name="filtro" value="crostacei"> Crostacei e derivati</label>
+        <label><input type="checkbox" name="filtro" value="lattosio"> Uova e derivati</label>
+        <label><input type="checkbox" name="filtro" value="pesce"> Pesce e derivati</label>
+        <label><input type="checkbox" name="filtro" value="arachidi"> Arachidi e derivati</label>
+        <label><input type="checkbox" name="filtro" value="soia"> Soia e derivati</label>
+        <label><input type="checkbox" name="filtro" value="latte"> Latte e derivati</label>
+        <label><input type="checkbox" name="filtro" value="fruttaGuscio"> Frutta a guscio e derivati</label>
+        <label><input type="checkbox" name="filtro" value="sedano"> Sedano e derivati</label>
+        <label><input type="checkbox" name="filtro" value="senape"> Senape e derivati</label>
+        <label><input type="checkbox" name="filtro" value="sesamo"> Semi di sesamo</label>
+        <label><input type="checkbox" name="filtro" value="anidride"> Anidride solforosa e solfiti</label>
+        <label><input type="checkbox" name="filtro" value="lupino"> Lupino e derivati</label>
+        <label><input type="checkbox" name="filtro" value="molluschi"> Molluschi e derivati</label>
+        <label><input type="checkbox" name="filtro" value="nichel"> Nichel</label>
+        <label><input type="checkbox" name="filtro" value="fruttosio"> Fruttosio</label>
+        <label><input type="checkbox" name="filtro" value="additivi"> Additivi alimentari (coloranti e conservanti)</label>
+        <label><input type="checkbox" name="filtro" value="lieviti"> Lieviti</label>
+        <label><input type="checkbox" name="filtro" value="solanacee"> Solanacee</label>
+        <label><input type="checkbox" name="filtro" value="agrumi"> Agrumi</label>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="bottoni">
+    <input type="submit" value="Cerca" class="bottoni-2">
+    <button id="cancellaFiltri" class="bottoni-2">Cancella filtri</button>
+  </div>
+</form>
+
+<!-- SCRIPTS-->
 <script src="scripts/script.js"></script>
+<script src="scripts/scelta1.js"></script>
 </body>
 </html>
