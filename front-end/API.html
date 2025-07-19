@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Previsioni Meteo 5 Giorni</title>
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  background-color: #eef1f5;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.1);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.forecast-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.forecast-item img {
+  width: 50px;
+  height: 50px;
+}
+
+.forecast-item p {
+  margin: 0 10px;
+  flex: 1;
+  text-align: center;
+}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Previsioni Meteo – Terni (5 giorni)</h1>
+    <div id="forecast"></div>
+  </div>
+
+  <script>
+    const API_KEY = '8538788ed3e43a05b6ec6dcbb2c76068';
+const CITY = 'Terni';
+
+const URL = `https://api.openweathermap.org/data/2.5/forecast?q=${CITY}&units=metric&lang=it&appid=${API_KEY}`;
+
+fetch(URL)
+  .then(res => res.json())
+  .then(data => {
+    const forecastDiv = document.getElementById('forecast');
+
+    data.list.forEach(item => {
+      const date = new Date(item.dt_txt);
+      const options = { weekday: 'short', hour: '2-digit', minute: '2-digit' };
+      const timeStr = date.toLocaleDateString('it-IT', options);
+
+      const temp = Math.round(item.main.temp);
+      const desc = item.weather[0].description;
+      const icon = item.weather[0].icon;
+
+      const html = `
+        <div class="forecast-item">
+          <p>${timeStr}</p>
+          <img src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="${desc}" />
+          <p>${temp}°C</p>
+          <p>${desc}</p>
+        </div>
+      `;
+      forecastDiv.innerHTML += html;
+    });
+  })
+  .catch(error => {
+    console.error('Errore nel caricamento delle previsioni:', error);
+    document.getElementById('forecast').innerHTML = "<p>Errore nel caricamento dei dati meteo.</p>";
+  });
+
+  </script>
+</body>
+</html>
