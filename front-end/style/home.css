@@ -19,11 +19,11 @@
 }
 
 .intro{
-  height: 200px;
+  height: 300px;
   width: 500px;
   background: #F7F0E0;
   border-radius: 4px;
-  align-items: center;
+  text-align: center;
   justify-content: center;
   
 }
