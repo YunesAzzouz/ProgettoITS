@@ -1,6 +1,17 @@
-.login{
+.form_login{
     display: flex;
     flex-direction: column;
     padding: 30px 250px;
     margin-top: 10px;
+}
+
+.form_login label{
+    margin-top: 10px;
+
+}
+
+.form_login input{
+    background: var(--bg-forms);
+    height: 25px;
+    border: none;
 }
