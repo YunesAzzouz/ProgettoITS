@@ -46,19 +46,23 @@
   </section>
   
   <!-- LOGIN-->
-  <div>
-    <form class="login" id="loginForm">
-        <label> E-mail</label>
-        <input type="email" name="email"  id="mail_login" placeholder="latuaemail@gmail.com"> 
-        <label> Password</label>
-        <input type="password" name="password" id="password_login" placeholder="password"> 
-      <button> Login</button>
+
+   <section class="login">
+    <form class="form_login">
+      <label> E-mail</label>
+      <input type="email" name="email"  id="mail_login" placeholder="latuaemail@gmail.com"> 
+
+      <label> Password</label>
+      <input type="password" name="password" id="password_login" placeholder="password"> 
+
+      <button> Submit</button>
+
     </form>
   </div>
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    const loginForm = document.getElementById("loginForm");
+    const loginForm = document.getElementById("form_login");
 
     loginForm.addEventListener("submit", async (e) => {
       e.preventDefault();
