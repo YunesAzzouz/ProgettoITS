@@ -12,6 +12,7 @@
   --bg-forms: #d5d5d5;
   --bg-forms-send: #715A3F;
 }
+
 /*NAVBAR*/
 .navbar {
   display: flex;
@@ -24,12 +25,16 @@
 
 .nav-links{
   display: flex;
+
   justify-content: space-between;
   gap: 20px;
 }
 
 .nav-links.active {
   display: flex;
+  gap: 25px;
+  
+
 }
 
 .logo{

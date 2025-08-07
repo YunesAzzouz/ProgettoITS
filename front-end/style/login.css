@@ -51,3 +51,11 @@
     height: 25px;
     border: none;
 }
+
+.form_login button{
+    background: var(--bg-forms-send);
+    opacity:0.5;
+    margin-top: 25px;
+    height: 30px;
+    border-radius: 2px;
+}
