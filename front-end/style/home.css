@@ -28,19 +28,23 @@
   
 }
 
-.btn-prenota{
+.btn{
+  display:flex;
   border-color: #b6aa8c;
   border-radius: 3px;
   background: var(--bg-primary-color);
   color: black;
   height: 50px;
   width: 150px;
-  justify-content: space-between;
+  justify-content: space-between, center;
+  align-items: center;
+  text-align: center;
 }
-
-.btn{
+.div-btn{
   display: flex;
   justify-content: center;
   align-items: center;
-  
 }
+
+
+
