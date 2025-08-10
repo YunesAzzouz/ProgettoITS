@@ -50,14 +50,34 @@ a :hover{
   text-decoration: underline;
 }
 
+.container {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -50px; /* Stessa altezza del footer */
+}
+
+.content {
+  padding-bottom: 50px; /* Spazio per il footer */
+}
+
+.push {
+  height: 50px; /* Stessa altezza del footer */
+}
+
+
+
+
+
 /*FOOTER*/
 .footer{
   display: flex;
-  align-items: center;
+  align-items: end;
+  justify-items: end;
   padding: 30px 20px;
   background:var(--bg-primary-color);
   height: 50px;
-  position: sticky;
+  
 }
 
 
