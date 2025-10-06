@@ -2,6 +2,9 @@ document.getElementById("scelta").addEventListener("submit", async function (e) 
   e.preventDefault();
 
   const tipoRistorante = document.querySelector('input[name="filtro"]:checked')?.value;
+  const tipoRistoranteNum = tipoRistorante ? Number(tipoRistorante) : null;
+  console.log("Tipo selezionato:", tipoRistoranteNum);
+
   const allergie = Array.from(
     document.querySelectorAll('input[type="checkbox"]:checked')
   ).map(el => el.value);
@@ -20,13 +23,16 @@ document.getElementById("scelta").addEventListener("submit", async function (e) 
 
   // Fetch matching restaurants
   const queryParams = new URLSearchParams();
-  if (tipoRistorante) queryParams.append("tipo", tipoRistorante);
+  if (tipoRistoranteNum) queryParams.append("tipo", tipoRistoranteNum);
   allergie.forEach(all => queryParams.append("allergie", all));
 
   const fetchRes = await fetch(`http://localhost:3000/api/restaurants?${queryParams}`);
   const restaurants = await fetchRes.json();
 
+
   // Display results (for now: log to console or alert)
+  console.log("Tipo selezionato:", tipoRistorante);
+  console.log("Allergie selezionate:", allergie);
   console.log("Matching restaurants:", restaurants);
 
   if (restaurants.length === 0) {
@@ -48,7 +54,7 @@ function displayRestaurants(restaurants) {
     card.innerHTML = `
       <h4>${r.Nome}</h4>
       <p>Indirizzo: ${r.Indirizzo}</p>
-      <p>Tipo: ${r.FK_Tipo}</p>
+      <p>tipoRistorante: ${r.FK_Tipo}</p>
     `;
     container.appendChild(card);
   });

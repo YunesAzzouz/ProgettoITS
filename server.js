@@ -107,7 +107,6 @@ app.get("/api/restaurants", async (req, res) => {
   try {
     const collection = db.collection("Ristoranti");
 
-    // Parse query parameters
     const tipoInt = parseInt(tipo);
     const allergieArray = Array.isArray(allergie)
       ? allergie.map(Number)
@@ -115,22 +114,20 @@ app.get("/api/restaurants", async (req, res) => {
       ? [parseInt(allergie)]
       : [];
 
-    // Build the query
     const query = {};
-
-    if (!isNaN(tipoInt)) {
-      query.FK_Tipo = tipoInt;
-    }
-
+    if (!isNaN(tipoInt)) query.FK_Tipo = tipoInt;
     if (allergieArray.length > 0) {
-      query.FK_Filtro = { $nin: allergieArray }; // Exclude restaurants with any matching allergen
+      query.FK_Filtro = { $not: { $elemMatch: { $in: allergieArray } } };
     }
+
+    console.log("Tipo selezionato dal frontend:", tipoInt);
+    console.log("Query finale:", query);
 
     const results = await collection.find(query).toArray();
-    res.json(results);
+    res.json(results); // ✅ Make sure it's JSON
   } catch (err) {
     console.error("Error fetching restaurants:", err);
-    res.status(500).send("Errore durante la ricerca.");
+    res.status(500).json({ error: "Errore durante la ricerca." }); // ✅ JSON for frontend
   }
 });
 
