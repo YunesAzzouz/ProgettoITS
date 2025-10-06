@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Previsioni Meteo 5 Giorni</title>
+  <link rel="stylesheet" href="style/API.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Previsioni Meteo – Terni (5 giorni)</h1>
+    <div id="forecast"></div>
+  </div>
+  <div class="bottoni">
+  <button class="bottoni-2" onclick="window.location.href='scelta1.html';">Clicca qui per tornare indietro</button>
+</div>
+
+  <script>
+    const API_KEY = '8538788ed3e43a05b6ec6dcbb2c76068';
+const CITY = 'Terni';
+
+const URL = `https://api.openweathermap.org/data/2.5/forecast?q=${CITY}&units=metric&lang=it&appid=${API_KEY}`;
+
+fetch(URL)
+  .then(res => res.json())
+  .then(data => {
+    const forecastDiv = document.getElementById('forecast');
+
+    data.list.forEach(item => {
+      const date = new Date(item.dt_txt);
+      const options = { weekday: 'short', hour: '2-digit', minute: '2-digit' };
+      const timeStr = date.toLocaleDateString('it-IT', options);
+
+      const temp = Math.round(item.main.temp);
+      const desc = item.weather[0].description;
+      const icon = item.weather[0].icon;
+
+      const html = `
+        <div class="forecast-item">
+          <p>${timeStr}</p>
+          <img src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="${desc}" />
+          <p>${temp}°C</p>
+          <p>${desc}</p>
+        </div>
+      `;
+      forecastDiv.innerHTML += html;
+    });
+  })
+  .catch(error => {
+    console.error('Errore nel caricamento delle previsioni:', error);
+    document.getElementById('forecast').innerHTML = "<p>Errore nel caricamento dei dati meteo.</p>";
+  });
+
+  </script>
+</body>
+</html>
