@@ -38,7 +38,7 @@ document.getElementById("scelta").addEventListener("submit", async function (e) 
   if (restaurants.length === 0) {
     alert("Nessun ristorante trovato con i filtri selezionati.");
   } else {
-    alert(`Trovati ${restaurants.length} ristoranti! Controlla la console.`);
+    displayRestaurants(restaurants);
     // OR: show them in the DOM
     // displayRestaurants(restaurants);
   }
