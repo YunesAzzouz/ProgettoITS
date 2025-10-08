@@ -105,8 +105,6 @@ app.get("/api/restaurants", async (req, res) => {
   const { tipo, allergie } = req.query;
 
   try {
-    const collection = db.collection("Ristoranti");
-
     const tipoInt = parseInt(tipo);
     const allergieArray = Array.isArray(allergie)
       ? allergie.map(Number)
@@ -114,22 +112,90 @@ app.get("/api/restaurants", async (req, res) => {
       ? [parseInt(allergie)]
       : [];
 
-    const query = {};
-    if (!isNaN(tipoInt)) query.FK_Tipo = tipoInt;
+    const matchQuery = {};
+    if (!isNaN(tipoInt)) matchQuery.FK_Tipo = tipoInt;
     if (allergieArray.length > 0) {
-      query.FK_Filtro = { $not: { $elemMatch: { $in: allergieArray } } };
+      matchQuery.FK_Filtro = { $not: { $in: allergieArray } };
     }
 
-    console.log("Tipo selezionato dal frontend:", tipoInt);
-    console.log("Query finale:", query);
+    const results = await db.collection("Ristoranti").aggregate([
+      { $match: matchQuery },
 
-    const results = await collection.find(query).toArray();
-    res.json(results); // ✅ Make sure it's JSON
+      // Optional normalization in case of string numbers
+      {
+        $addFields: {
+          FK_Tipo: { $toInt: "$FK_Tipo" },
+          FK_Filtro: {
+            $cond: {
+              if: { $isArray: "$FK_Filtro" },
+              then: "$FK_Filtro",
+              else: [{ $toInt: "$FK_Filtro" }]
+            }
+          }
+        }
+      },
+
+      // Joins
+      {
+        $lookup: {
+          from: "TipoRistoranti",
+          localField: "FK_Tipo",
+          foreignField: "ID",
+          as: "TipoRistorante"
+        }
+      },
+      {
+        $lookup: {
+          from: "Citta",
+          localField: "FK_Citta",
+          foreignField: "Cap",
+          as: "Citta"
+        }
+      },
+      {
+        $lookup: {
+          from: "Filtro",
+          localField: "FK_Filtro",
+          foreignField: "ID",
+          as: "Filtro"
+        }
+      },
+
+      // Unwind the one-to-one joins (Tipo, Citta)
+      { $unwind: { path: "$TipoRistorante", preserveNullAndEmptyArrays: true } },
+      { $unwind: { path: "$Citta", preserveNullAndEmptyArrays: true } },
+
+      // Group to avoid duplicates from multiple filters
+      {
+        $group: {
+          _id: {
+            Nome: "$Nome",
+            Indirizzo: "$Indirizzo",
+            Tipo: "$TipoRistorante.Nome",
+            Citta: "$Citta.Nome"
+          },
+          Filtri: { $addToSet: "$Filtro.Nome" }
+        }
+      },
+      {
+        $project: {
+          _id: 0,
+          Nome: "$_id.Nome",
+          Indirizzo: "$_id.Indirizzo",
+          Tipo: "$_id.Tipo",
+          Citta: "$_id.Citta",
+          Filtri: 1
+        }
+      }
+    ]).toArray();
+
+    res.json(results);
   } catch (err) {
     console.error("Error fetching restaurants:", err);
-    res.status(500).json({ error: "Errore durante la ricerca." }); // ✅ JSON for frontend
+    res.status(500).json({ error: "Errore durante la ricerca." });
   }
 });
+
 
 // Start server
 app.listen(port, () => {
