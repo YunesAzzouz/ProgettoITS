@@ -50,8 +50,30 @@
   <!-- Form di scelta -->
   <form id="scelta">
     <div class="scelta">
-      <!-- Tipo di ristorante -->
       <div class="filtro-container">
+        <!--Scelta città-->
+        <h3> Scegli la città in cui vuoi mangiare</h3>
+        <div class="filtro-opzioni">
+          <label>
+            <input type="radio" name="citta" value="terni"> Terni
+          </label>
+          <label>
+            <input type="radio" name="citta" value="spoleto"> Spoleto
+          </label>
+          <label>
+            <input type="radio" name="citta" value="perugia"> Perugia
+          </label>
+          <label>
+            <input type="radio" name="citta" value="todi"> Todi
+          </label>
+          <label>
+            <input type="radio" name="citta" value="assiss"> Assisi
+          </label>
+        </div>
+      </div>
+
+      <div class="filtro-container">
+        <!-- Tipo di ristorante -->
         <h3>Scegli il tipo di ristorante</h3>
         <div class="filtro-opzioni">
           <label><input type="radio" name="filtro" value="1">Pizzerie</label>
@@ -98,8 +120,8 @@
 
     <!-- Bottoni -->
     <div class="bottoni">
-      <input type="submit" value="Cerca" class="bottoni-2">
       <button id="cancellaFiltri" type="button" class="bottoni-2">Cancella filtri</button>
+      <input type="submit" value="Cerca" class="bottoni-2">
       <button type="button" class="bottoni-2" onclick="window.location.href='API.html';">
         Clicca qui per controllare il meteo!
       </button>

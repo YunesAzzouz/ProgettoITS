@@ -46,6 +46,16 @@ document.getElementById("scelta").addEventListener("submit", async function (e) 
 
 function displayRestaurants(restaurants) {
   const container = document.getElementById("results");
+  
+  // Se non ci sono ristoranti, nascondi la sezione
+  if (!restaurants || restaurants.length === 0) {
+    container.style.display = "none";
+    container.innerHTML = "";
+    return;
+  }
+
+  // Se ci sono risultati, mostrali
+  container.style.display = "grid"; // oppure "block" se preferisci
   container.innerHTML = "";
 
   restaurants.forEach(r => {
@@ -62,6 +72,7 @@ function displayRestaurants(restaurants) {
   });
 }
 
+
 // ✅ Clear all filters
 document.getElementById("cancellaFiltri").addEventListener("click", () => {
   // Uncheck all radio buttons (restaurant types)
@@ -73,6 +84,10 @@ document.getElementById("cancellaFiltri").addEventListener("click", () => {
   // Clear results section
   const container = document.getElementById("results");
   container.innerHTML = "";
+
+  // Doesn't show results cards if filters are deleted
+  document.getElementById("results").style.display = "none";
+
 
   // Optional: show a friendly confirmation
   alert("Filtri cancellati!");
