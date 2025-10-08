@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/login.css">
+</head>
+<body>
+   <section class="navbar">
+    <div class="logo-titolo">
+      <div class="logo">
+        <a href="index.html">
+          <img class="logo" src="img/logo.jpeg" alt="Logo" />
+        </a>
+        <br />
+      </div>
+      <h1>Booking Restaurant</h1>
+    </div>
+      
+    <button class="menu-toggle" onclick="toggleMenu()">
+      <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="feather feather-menu"
+      >
+      <line x1="3" y1="12" x2="21" y2="12" />
+      <line x1="3" y1="6" x2="21" y2="6" />
+      <line x1="3" y1="18" x2="21" y2="18" />
+      </svg>
+    </button>
+    <div class="nav-links">
+        <a href="index.html" alt="Pagina Home">Home</a>
+        <a href="contact.html" alt="Pagina Contatti">Contattaci</a>
+        <a class="active" href="login.html" alt="Pagina Login">Login</a>
+        <a href="registrati.html" alt="Pagina Registrazione">Registrati</a>
+    </div>
+  </section>
+  
+  <!-- LOGIN-->
+
+   <section class="login">
+    <form class="form_login">
+      <label> E-mail</label>
+      <input type="email" name="email"  id="mail_login" placeholder="latuaemail@gmail.com"> 
+
+      <label> Password</label>
+      <input type="password" name="password" id="password_login" placeholder="password"> 
+
+      <button> Submit</button>
+
+    </form>
+  </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const loginForm = document.querySelector(".form_login");
+
+    loginForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById("mail_login").value;
+      const password = document.getElementById("password_login").value;
+
+      try {
+        const res = await fetch("/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ email, password })
+        });
+
+        const text = await res.text();
+
+        if (res.ok) {
+          alert("Login effettuato con successo!");
+          loginForm.reset();
+          // Optionally redirect:
+          // window.location.href = "/dashboard.html";
+        } else {
+          alert("Errore: " + text);
+        }
+      } catch (err) {
+        console.error("Network error:", err);
+        alert("Errore di rete.");
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

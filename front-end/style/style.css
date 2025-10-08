@@ -1,0 +1,128 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  
+}
+
+:root {
+  --bg-primary-color:#F7F0E0;
+  --bg-forms: #d5d5d5;
+  --bg-forms-send: #715A3F;
+}
+
+/*NAVBAR*/
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 20px;
+  background:var(--bg-primary-color);
+  height: 150px;
+}
+
+.nav-links{
+  display: flex;
+
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.nav-links.active {
+  display: flex;
+  gap: 25px;
+  
+
+}
+
+.logo{
+  height: 140px;
+  width: 150px;
+}
+
+.logo-titolo{
+  display: flex;
+  align-items: center;
+}
+
+a {
+  text-decoration: none; /* Rimuove la sottolineatura di default */
+  color: #60553a; 
+}
+
+
+a :hover{
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.active {
+  text-decoration: underline; 
+}
+
+.intro {
+  padding: 15px;
+}
+
+
+/*FOOTER*/
+.footer{
+  display: flex;
+  align-items: center;
+  padding: 30px 20px;
+  background:var(--bg-primary-color);
+  height: 50px;
+  position: sticky;
+}
+
+
+/* MEDIA QUERY*/
+@media screen and (max-width:800px ){
+  .presentazione{
+    display: flex;
+    flex-direction:column;
+    gap: 25px;
+    align-items: center;
+  }
+
+  .nav-links{
+    display: none;
+    flex-direction: column;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .scelta{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+
+  }
+
+  .result-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:20px;
+  }
+
+  .bottoni{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+    
+  }
+}
