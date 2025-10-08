@@ -196,6 +196,29 @@ app.get("/api/restaurants", async (req, res) => {
   }
 });
 
+app.post("/api/contact", async (req, res) => {
+  const { email, messaggio } = req.body;
+
+  if (!email || !messaggio) {
+    return res.status(400).json({ error: "Email e messaggio sono obbligatori." });
+  }
+
+  try {
+    const collection = db.collection("Messaggi");
+    const newMessage = {
+      email,
+      contenuto: messaggio,
+      createdAt: new Date()
+    };
+    await collection.insertOne(newMessage);
+    res.json({ message: "Messaggio inviato con successo!" });
+  } catch (err) {
+    console.error("Errore durante l'invio del messaggio:", err);
+    res.status(500).json({ error: "Errore del server." });
+  }
+});
+
+
 
 // Start server
 app.listen(port, () => {
