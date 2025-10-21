@@ -50,6 +50,7 @@
     background: var(--bg-forms);
     height: 25px;
     border: none;
+    color: black;
 }
 
 .form_login button{
@@ -58,4 +59,15 @@
     margin-top: 25px;
     height: 30px;
     border-radius: 2px;
+}
+
+.passaRegistrazione {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.passaRegistrazione a {
+    color: green;
+    opacity: 0.7;
 }
