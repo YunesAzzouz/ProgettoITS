@@ -63,10 +63,10 @@ function displayRestaurants(restaurants) {
     card.className = "restaurant-card";
     card.innerHTML = `
       <h4>${r.Nome}</h4>
-      <p>Indirizzo: ${r.Indirizzo}</p>
-      <p>Tipo: ${r.Tipo || 'N/A'}</p>
-      <p>Città: ${r.Citta || 'N/A'}</p>
-      <p>Filtri: ${r.Filtri && r.Filtri.length ? r.Filtri.join(", ") : "Nessuno"}</p>
+      <p><strong>Indirizzo:</strong> ${r.Indirizzo}</p>
+      <p><strong>Tipo:</strong>${r.Tipo || 'N/A'}</p>
+      <p><strong>Città:</strong> ${r.Citta || 'N/A'}</p>
+      <p><strong>Filtri: </strong> ${r.Filtri && r.Filtri.length ? r.Filtri.join(", ") : "Nessuno"}</p>
     `;
     container.appendChild(card);
   });

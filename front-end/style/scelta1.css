@@ -52,15 +52,27 @@
 }
 
 .restaurant-card{
-  height: 300px;
-  width: 250px;
+  
+  height: 350px;
+  width: 300px;
   background: var(--bg-primary-color);
   border: 2px solid var(--bg-forms-send);
   border-radius: 4px;
   margin-top: 20px;
   align-items: center;
   justify-content: center;
+  padding:5px 5px;
 }
+.restaurant-card h4{
+ justify-content: center;
+ align-items: center;
+ margin-bottom: 3px;
+}
+
+.restaurant-card p{
+  margin-top: 6px;
+}
+
 
 #results {
   display: none;
