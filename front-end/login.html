@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/login.css">
+    <link rel="icon" type="image/x-icon" href="img/logo.jpeg" />
 </head>
 <body>
    <section class="navbar">
@@ -48,12 +49,23 @@
     <form id="loginForm" class="form_login">
     <label>E-mail</label>
     <input type="email" name="email" id="email" placeholder="latuaemail@gmail.com">
+    <div class="passaRegistrazione">
+        <h3>
+          Se non hai già un account vai alla <a href="registrati.html">Registrazione</a>
+        </h3>
+    </div>
+    <form class="form_login">
+      <label> E-mail</label>
+      <input type="email" name="email"  id="mail_login" placeholder="latuaemail@gmail.com"> 
 
     <label>Password</label>
     <input type="password" name="password" id="password" placeholder="password">
 
     <button type="submit">Submit</button>
   </form>
+      <button> Entra</button>
+
+    </form>
   </div>
   </section>  
   <script src="scripts/script.js"></script>
