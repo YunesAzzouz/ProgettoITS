@@ -44,58 +44,18 @@
         <a href="registrati.html" alt="Pagina Registrazione">Registrati</a>
     </div>
   </section>
-  
-  <!-- LOGIN-->
-
    <section class="login">
-    <form class="form_login">
-      <label> E-mail</label>
-      <input type="email" name="email"  id="mail_login" placeholder="latuaemail@gmail.com"> 
+    <form id="loginForm" class="form_login">
+    <label>E-mail</label>
+    <input type="email" name="email" id="email" placeholder="latuaemail@gmail.com">
 
-      <label> Password</label>
-      <input type="password" name="password" id="password_login" placeholder="password"> 
+    <label>Password</label>
+    <input type="password" name="password" id="password" placeholder="password">
 
-      <button> Submit</button>
-
-    </form>
+    <button type="submit">Submit</button>
+  </form>
   </div>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const loginForm = document.querySelector(".form_login");
-
-    loginForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      const email = document.getElementById("mail_login").value;
-      const password = document.getElementById("password_login").value;
-
-      try {
-        const res = await fetch("/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ email, password })
-        });
-
-        const text = await res.text();
-
-        if (res.ok) {
-          alert("Login effettuato con successo!");
-          loginForm.reset();
-          // Optionally redirect:
-          // window.location.href = "/dashboard.html";
-        } else {
-          alert("Errore: " + text);
-        }
-      } catch (err) {
-        console.error("Network error:", err);
-        alert("Errore di rete.");
-      }
-    });
-  });
-</script>
-
+  </section>  
+  <script src="scripts/script.js"></script>
 </body>
 </html>

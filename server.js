@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-const { MongoClient } = require("mongodb");
+const { MongoClient, ObjectId } = require("mongodb");
 const bcrypt = require("bcrypt");
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -218,7 +218,77 @@ app.post("/api/contact", async (req, res) => {
   }
 });
 
+// Aggiunge un ristorante ai preferiti
+// Aggiungi ai preferiti
+app.post("/api/favorites/add", async (req, res) => {
+  const { email, restaurantName } = req.body;
 
+  if (!email || !restaurantName) {
+    return res.status(400).json({ error: "Email e nome ristorante sono obbligatori." });
+  }
+
+  try {
+    const collection = db.collection("Favorites");
+    await collection.updateOne(
+      { email },
+      { $addToSet: { restaurants: restaurantName } }, // usa il nome direttamente
+      { upsert: true }
+    );
+    res.json({ message: `Ristorante "${restaurantName}" aggiunto ai preferiti!` });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Errore durante il salvataggio del preferito." });
+  }
+});
+
+// Rimuovi dai preferiti
+app.post("/api/favorites/remove", async (req, res) => {
+  const { email, restaurantName } = req.body;
+
+  if (!email || !restaurantName) {
+    return res.status(400).json({ error: "Email e nome ristorante sono obbligatori." });
+  }
+
+  try {
+    const collection = db.collection("Favorites");
+    await collection.updateOne(
+      { email },
+      { $pull: { restaurants: restaurantName } }
+    );
+    res.json({ message: `Ristorante "${restaurantName}" rimosso dai preferiti.` });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Errore durante la rimozione del preferito." });
+  }
+});
+
+// Ottieni preferiti
+app.get("/api/favorites", async (req, res) => {
+  const { email } = req.query;
+
+  if (!email) {
+    return res.status(400).json({ error: "Email obbligatoria." });
+  }
+
+  try {
+    const collection = db.collection("Favorites");
+    const doc = await collection.findOne({ email });
+
+    if (!doc || !doc.restaurants || doc.restaurants.length === 0) {
+      return res.json([]);
+    }
+
+    // Trova dati completi dei ristoranti
+    const restaurants = await db.collection("Ristoranti").find({
+      Nome: { $in: doc.restaurants }
+    }).toArray();
+
+    res.json(restaurants);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Errore durante il recupero dei preferiti." });
+  }
+});
 
 // Start server
 app.listen(port, () => {
