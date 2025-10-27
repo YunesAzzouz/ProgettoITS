@@ -8,9 +8,10 @@
 
 .filtro-container {
   max-width: 500px;
-  border: 1px solid #ddd;
+  border: 4px solid var(--bg-primary-color);
   padding: 20px;
   border-radius: 6px;
+
 }
 
 .filtro-opzioni label {
@@ -34,10 +35,18 @@
 .bottoni-2 {
   margin-top: 15px;
   padding: 8px 12px;
-  background-color: white;
-  border: 1px solid #ccc;
+  background-color: var(--bg-primary-color);
+  border: 3px solid var(--bg-primary-color);
   border-radius: 6px;
   cursor: pointer;
+}
+
+input[type="checkbox"] {
+  accent-color: #f6ae06; 
+}
+
+input[type="radio"] {
+  accent-color: rgb(218, 233, 3); /* Sostituisci con il colore che desideri */
 }
 
 .bottoni-2:hover {

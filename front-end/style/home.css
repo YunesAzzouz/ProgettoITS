@@ -21,7 +21,7 @@
 .intro{
   height: 200px;
   width: 500px;
-  background: #F7F0E0;
+  background: linear-gradient(to right, var(--bg-primary-color), white);
   border-radius: 4px;
   text-align: center;
   justify-content: center;
@@ -32,6 +32,7 @@
   display:flex;
   border-color: #b6aa8c;
   border-radius: 3px;
+  border:none;
   background: var(--bg-primary-color);
   color: black;
   height: 50px;
@@ -40,6 +41,7 @@
   align-items: center;
   text-align: center;
 }
+
 .div-btn{
   display: flex;
   justify-content: center;
