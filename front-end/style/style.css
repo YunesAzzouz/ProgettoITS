@@ -8,7 +8,7 @@
 }
 
 :root {
-  --bg-primary-color:#fef3d9;
+  --bg-primary-color:rgba(241, 197, 136);
   --bg-forms: #d5d5d5;
   --bg-forms-send: #715A3F;
 }
@@ -21,6 +21,7 @@
   padding: 30px 20px;
   background:var(--bg-primary-color);
   height: 150px;
+  overflow: hidden;
 }
 
 .nav-links{
@@ -38,8 +39,8 @@
 }
 
 .logo{
-  height: 140px;
-  width: 150px;
+  height:170px;;
+  width: 240px;
 }
 
 .logo-titolo{

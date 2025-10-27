@@ -32,6 +32,15 @@
     gap: 50px;
 }
 
+.fav-btn{
+  background-color: #f0c798;
+  border: 3px solid var(--bg-primary-color);
+  border-radius: 5px;
+  cursor: pointer;
+  height: 50px;
+  width: 120px;
+}
+
 .bottoni-2 {
   margin-top: 15px;
   padding: 8px 12px;
@@ -75,7 +84,7 @@ input[type="radio"] {
   height: 350px;
   width: 300px;
   background: var(--bg-primary-color);
-  border: 1px solid var(--bg-forms-send);
+  border: none;
   border-radius: 8px;
   padding: 10px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
