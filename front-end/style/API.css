@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #eef1f5;
+  background-color: var(--bg-primary-color);
   margin: 0;
   padding: 20px;
 }
@@ -11,12 +11,13 @@ body {
   background: white;
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 0 12px rgba(0,0,0,0.1);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
   text-align: center;
   margin-bottom: 30px;
+  border-bottom: 5px solid var(--bg-primary-color);
 }
 
 .forecast-item {
@@ -24,7 +25,7 @@ h1 {
   align-items: center;
   justify-content: space-between;
   padding: 12px 10px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 2px solid var(--bg-primary-color);
 }
 
 .forecast-item img {
@@ -47,12 +48,23 @@ h1 {
 .bottoni-2 {
   margin-top: 15px;
   padding: 8px 12px;
-  background-color: white;
-  border: 1px solid #ccc;
+  background: var(--bg-forms-send);
+  border: none;
   border-radius: 6px;
   cursor: pointer;
 }
 
 .bottoni-2:hover {
-  background-color: #f5f5f5;
+  background-color: var(--bg-primary-color);
+}
+
+.city-select{
+  margin-bottom: 20px;
+
+}
+
+#city{
+  border-radius: 2px;
+  height: 20px;
+  width: 80px;
 }
