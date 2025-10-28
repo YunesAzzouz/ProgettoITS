@@ -21,7 +21,7 @@
 .intro{
   height: 200px;
   width: 500px;
-  background:var(--bg-primary-color);
+  background: var(--bg-primary-color);
   border-radius: 4px;
   text-align: center;
   justify-content: center;
@@ -29,7 +29,7 @@
 }
 
 .intro h1{
-  border-bottom: 2px solid black;
+  border-bottom: 1px solid rgb(47, 46, 42);
 }
 
 
@@ -45,6 +45,12 @@
   justify-content: space-between, center;
   align-items: center;
   text-align: center;
+}
+
+.btn:hover{
+  cursor: pointer;
+  height: 70px;
+  width: 160px;
 }
 
 .div-btn{
