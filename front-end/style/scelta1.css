@@ -9,7 +9,7 @@
 
 .filtro-container {
   max-width: 500px;
-  border: 4px solid var(--bg-primary-color);
+  border: 4px solid var(--bg-secondary-color);
   padding: 20px;
   gap:10px;
   border-radius: 6px;
@@ -45,7 +45,7 @@ h3{
 }
 
 .fav-btn{
-  background-color: #998369;
+  background-color: var(--bg-secondary-color);
   border: 3px solid var(--bg-primary-color);
   border-radius: 5px;
   cursor: pointer;
@@ -68,11 +68,11 @@ h3{
 }
 
 input[type="checkbox"] {
-  accent-color: #f6ae06; 
+  accent-color: #61935e; 
 }
 
 input[type="radio"] {
-  accent-color: rgb(218, 233, 3); /* Sostituisci con il colore che desideri */
+  accent-color: rgb(100, 155, 107); /* Sostituisci con il colore che desideri */
 }
 
 .bottoni-2:hover {
@@ -103,7 +103,7 @@ input[type="radio"] {
   height: 350px;
   width: 300px;
   background: var(--bg-primary-color);
-  border: 2px solid #998369;
+  border: 2px solid var(--bg-secondary-color);
   border-radius: 8px;
   padding: 10px;
   transition: transform 0.3s ease, box-shadow 0.2s ease;

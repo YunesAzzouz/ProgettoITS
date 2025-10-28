@@ -21,7 +21,7 @@
 .intro{
   height: 200px;
   width: 500px;
-  background: var(--bg-primary-color);
+  background:var(--bg-primary-color);
   border-radius: 4px;
   text-align: center;
   justify-content: center;
@@ -50,6 +50,7 @@
 .btn:hover{
   cursor: pointer;
   height: 70px;
+  background: var(--bg-secondary-color);
   width: 160px;
 }
 
