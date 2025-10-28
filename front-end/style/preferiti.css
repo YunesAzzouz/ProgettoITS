@@ -1,0 +1,26 @@
+h1{
+    text-align: center;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+#favorites-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  justify-content: center; 
+  justify-items: center; 
+  gap: 20px; 
+  padding: 20px;
+  border: 3px solid var(--bg-primary-color);
+  border-radius: 5px;
+  margin: 0 auto;
+  max-width: 1300
+}
+
+#loadFavs{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    background-color: var(--bg-primary-color);
+    
+}
