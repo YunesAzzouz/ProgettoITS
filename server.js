@@ -2,16 +2,25 @@ const express = require("express");
 const path = require("path");
 const { MongoClient, ObjectId } = require("mongodb");
 const bcrypt = require("bcrypt");
-const cors = require('cors');
-const bodyParser = require('body-parser');
+const cors = require("cors");
+const bodyParser = require("body-parser");
 
 const app = express();
 const port = 3000;
+
+// Middleware
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-// MongoDB connection URI
-const uri = 'mongodb+srv://allievosettimig:ProgettoITS@projectwork.6lruq01.mongodb.net/?retryWrites=true&w=majority&appName=ProjectWork';
+// 🔹 Servi tutti i file statici dal front-end
+// In questo modo http://localhost:3000/index.html funziona correttamente
+app.use(express.static(path.join(__dirname, "front-end")));
+
+// MongoDB connection
+const uri =
+  "mongodb+srv://allievosettimig:ProgettoITS@projectwork.6lruq01.mongodb.net/?retryWrites=true&w=majority&appName=ProjectWork";
 const client = new MongoClient(uri);
 let db;
 
@@ -26,12 +35,10 @@ async function connectDB() {
 }
 connectDB();
 
-// Middleware
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(express.static(path.join(__dirname, 'front-end')));
 
-// Routes
+// ==================== ROUTES ====================
+
+// 🔹 Registrazione
 app.post("/register", async (req, res) => {
   const { name, cognome, email, password } = req.body;
 
@@ -49,7 +56,7 @@ app.post("/register", async (req, res) => {
       Nome: name,
       Cognome: cognome,
       Email: email,
-      Password: hashedPassword
+      Password: hashedPassword,
     };
 
     await collection.insertOne(newUser);
@@ -60,6 +67,8 @@ app.post("/register", async (req, res) => {
   }
 });
 
+
+// 🔹 Login
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
@@ -76,13 +85,17 @@ app.post("/login", async (req, res) => {
       return res.status(401).send("Password errata.");
     }
 
-    res.send("Login effettuato con successo!");
+    // Reindirizza alla home (index.html dentro front-end)
+    res.redirect("/index.html");
+
   } catch (err) {
     console.error("Login error:", err);
     res.status(500).send("Errore del server.");
   }
 });
 
+
+// Salvataggio preferenze
 app.post("/api/preferences", async (req, res) => {
   const { tipoRistorante, allergie } = req.body;
 
@@ -90,7 +103,7 @@ app.post("/api/preferences", async (req, res) => {
     const collection = db.collection("Preferences");
     const newPreference = {
       tipoRistorante,
-      allergie: Array.isArray(allergie) ? allergie : [allergie]
+      allergie: Array.isArray(allergie) ? allergie : [allergie],
     };
 
     await collection.insertOne(newPreference);
@@ -101,6 +114,8 @@ app.post("/api/preferences", async (req, res) => {
   }
 });
 
+
+// Ricerca ristoranti
 app.get("/api/restaurants", async (req, res) => {
   const { tipo, allergie } = req.query;
 
@@ -118,76 +133,71 @@ app.get("/api/restaurants", async (req, res) => {
       matchQuery.FK_Filtro = { $not: { $in: allergieArray } };
     }
 
-    const results = await db.collection("Ristoranti").aggregate([
-      { $match: matchQuery },
-
-      // Optional normalization in case of string numbers
-      {
-        $addFields: {
-          FK_Tipo: { $toInt: "$FK_Tipo" },
-          FK_Filtro: {
-            $cond: {
-              if: { $isArray: "$FK_Filtro" },
-              then: "$FK_Filtro",
-              else: [{ $toInt: "$FK_Filtro" }]
-            }
-          }
-        }
-      },
-
-      // Joins
-      {
-        $lookup: {
-          from: "TipoRistoranti",
-          localField: "FK_Tipo",
-          foreignField: "ID",
-          as: "TipoRistorante"
-        }
-      },
-      {
-        $lookup: {
-          from: "Citta",
-          localField: "FK_Citta",
-          foreignField: "Cap",
-          as: "Citta"
-        }
-      },
-      {
-        $lookup: {
-          from: "Filtro",
-          localField: "FK_Filtro",
-          foreignField: "ID",
-          as: "Filtro"
-        }
-      },
-
-      // Unwind the one-to-one joins (Tipo, Citta)
-      { $unwind: { path: "$TipoRistorante", preserveNullAndEmptyArrays: true } },
-      { $unwind: { path: "$Citta", preserveNullAndEmptyArrays: true } },
-
-      // Group to avoid duplicates from multiple filters
-      {
-        $group: {
-          _id: {
-            Nome: "$Nome",
-            Indirizzo: "$Indirizzo",
-            Tipo: "$TipoRistorante.Nome",
-            Citta: "$Citta.Nome"
+    const results = await db
+      .collection("Ristoranti")
+      .aggregate([
+        { $match: matchQuery },
+        {
+          $addFields: {
+            FK_Tipo: { $toInt: "$FK_Tipo" },
+            FK_Filtro: {
+              $cond: {
+                if: { $isArray: "$FK_Filtro" },
+                then: "$FK_Filtro",
+                else: [{ $toInt: "$FK_Filtro" }],
+              },
+            },
           },
-          Filtri: { $addToSet: "$Filtro.Nome" }
-        }
-      },
-      {
-        $project: {
-          _id: 0,
-          Nome: "$_id.Nome",
-          Indirizzo: "$_id.Indirizzo",
-          Tipo: "$_id.Tipo",
-          Citta: "$_id.Citta",
-          Filtri: 1
-        }
-      }
-    ]).toArray();
+        },
+        {
+          $lookup: {
+            from: "TipoRistoranti",
+            localField: "FK_Tipo",
+            foreignField: "ID",
+            as: "TipoRistorante",
+          },
+        },
+        {
+          $lookup: {
+            from: "Citta",
+            localField: "FK_Citta",
+            foreignField: "Cap",
+            as: "Citta",
+          },
+        },
+        {
+          $lookup: {
+            from: "Filtro",
+            localField: "FK_Filtro",
+            foreignField: "ID",
+            as: "Filtro",
+          },
+        },
+        { $unwind: { path: "$TipoRistorante", preserveNullAndEmptyArrays: true } },
+        { $unwind: { path: "$Citta", preserveNullAndEmptyArrays: true } },
+        {
+          $group: {
+            _id: {
+              Nome: "$Nome",
+              Indirizzo: "$Indirizzo",
+              Tipo: "$TipoRistorante.Nome",
+              Citta: "$Citta.Nome",
+            },
+            Filtri: { $addToSet: "$Filtro.Nome" },
+          },
+        },
+        {
+          $project: {
+            _id: 0,
+            Nome: "$_id.Nome",
+            Indirizzo: "$_id.Indirizzo",
+            Tipo: "$_id.Tipo",
+            Citta: "$_id.Citta",
+            Filtri: 1,
+          },
+        },
+      ])
+      .toArray();
 
     res.json(results);
   } catch (err) {
@@ -196,6 +206,8 @@ app.get("/api/restaurants", async (req, res) => {
   }
 });
 
+
+// Messaggi contatti
 app.post("/api/contact", async (req, res) => {
   const { email, messaggio } = req.body;
 
@@ -208,7 +220,7 @@ app.post("/api/contact", async (req, res) => {
     const newMessage = {
       email,
       contenuto: messaggio,
-      createdAt: new Date()
+      createdAt: new Date(),
     };
     await collection.insertOne(newMessage);
     res.json({ message: "Messaggio inviato con successo!" });
@@ -218,7 +230,7 @@ app.post("/api/contact", async (req, res) => {
   }
 });
 
-// Aggiunge un ristorante ai preferiti
+
 // Aggiungi ai preferiti
 app.post("/api/favorites/add", async (req, res) => {
   const { email, restaurantName } = req.body;
@@ -231,7 +243,7 @@ app.post("/api/favorites/add", async (req, res) => {
     const collection = db.collection("Favorites");
     await collection.updateOne(
       { email },
-      { $addToSet: { restaurants: restaurantName } }, // usa il nome direttamente
+      { $addToSet: { restaurants: restaurantName } },
       { upsert: true }
     );
     res.json({ message: `Ristorante "${restaurantName}" aggiunto ai preferiti!` });
@@ -240,6 +252,7 @@ app.post("/api/favorites/add", async (req, res) => {
     res.status(500).json({ error: "Errore durante il salvataggio del preferito." });
   }
 });
+
 
 // Rimuovi dai preferiti
 app.post("/api/favorites/remove", async (req, res) => {
@@ -251,16 +264,14 @@ app.post("/api/favorites/remove", async (req, res) => {
 
   try {
     const collection = db.collection("Favorites");
-    await collection.updateOne(
-      { email },
-      { $pull: { restaurants: restaurantName } }
-    );
+    await collection.updateOne({ email }, { $pull: { restaurants: restaurantName } });
     res.json({ message: `Ristorante "${restaurantName}" rimosso dai preferiti.` });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Errore durante la rimozione del preferito." });
   }
 });
+
 
 // Ottieni preferiti
 app.get("/api/favorites", async (req, res) => {
@@ -278,10 +289,10 @@ app.get("/api/favorites", async (req, res) => {
       return res.json([]);
     }
 
-    // Trova dati completi dei ristoranti
-    const restaurants = await db.collection("Ristoranti").find({
-      Nome: { $in: doc.restaurants }
-    }).toArray();
+    const restaurants = await db
+      .collection("Ristoranti")
+      .find({ Nome: { $in: doc.restaurants } })
+      .toArray();
 
     res.json(restaurants);
   } catch (err) {
@@ -290,7 +301,8 @@ app.get("/api/favorites", async (req, res) => {
   }
 });
 
-// Start server
+
+// ==================== AVVIO SERVER ====================
 app.listen(port, () => {
-  console.log(`Server listening at http://localhost:${port}`);
+  console.log(`Server avviato su http://localhost:${port}`);
 });
