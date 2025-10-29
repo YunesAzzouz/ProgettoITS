@@ -37,7 +37,7 @@
 .form_login{
     display: flex;
     flex-direction: column;
-    padding: 30px 250px;
+    padding: 30px 30px;
     margin-top: 10px;
 }
 

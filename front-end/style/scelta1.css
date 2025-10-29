@@ -111,12 +111,14 @@ input[type="radio"] {
 
 .restaurant-card:hover{
   transform: scale(1.02);
+  
 }
 
 .restaurant-card h4{
  justify-content: center;
  align-items: center;
  margin-bottom: 3px;
+ border-bottom: 3px solid var(--bg-secondary-color);
 }
 
 .restaurant-card p{

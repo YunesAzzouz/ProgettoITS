@@ -11,7 +11,7 @@
   --bg-primary-color:#879a66;
   --bg-secondary-color: #2F5E3F;
   --bg-forms: #d5d5d5;
-  --bg-forms-send: #F8D161;
+  --bg-forms-send: #dcb747;
 }
 
 /*NAVBAR*/
@@ -50,14 +50,14 @@
 .logo-titolo{
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  
 }
 .titolo{
-  height: 100px;
-  width: 250px;
-  margin-left: 10px;
-  margin-right: 50px;
+  height: 150px;
+  width: 100%;
+  
 }
+
 a {
   text-decoration: none; /* Rimuove la sottolineatura di default */
   color: #60553a; 
