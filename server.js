@@ -117,7 +117,7 @@ app.post("/api/preferences", async (req, res) => {
 
 // Ricerca ristoranti
 app.get("/api/restaurants", async (req, res) => {
-  const { tipo, allergie } = req.query;
+  const { tipo, allergie, citta } = req.query;
 
   try {
     const tipoInt = parseInt(tipo);
@@ -127,81 +127,103 @@ app.get("/api/restaurants", async (req, res) => {
       ? [parseInt(allergie)]
       : [];
 
-    const matchQuery = {};
-    if (!isNaN(tipoInt)) matchQuery.FK_Tipo = tipoInt;
-    if (allergieArray.length > 0) {
-      matchQuery.FK_Filtro = { $not: { $in: allergieArray } };
-    }
+    console.log("🔍 Filtri ricevuti dal client:", {
+      tipo: tipoInt || null,
+      citta: citta || null,
+      allergie: allergieArray
+    });
 
-    const results = await db
-      .collection("Ristoranti")
-      .aggregate([
-        { $match: matchQuery },
-        {
-          $addFields: {
-            FK_Tipo: { $toInt: "$FK_Tipo" },
-            FK_Filtro: {
-              $cond: {
-                if: { $isArray: "$FK_Filtro" },
-                then: "$FK_Filtro",
-                else: [{ $toInt: "$FK_Filtro" }],
-              },
-            },
+    const pipeline = [
+      // --- Convert FK_Tipo to int, FK_Filtro to int array, keep FK_Citta as string ---
+      {
+        $addFields: {
+          FK_Tipo: { $toInt: "$FK_Tipo" },
+          FK_Filtro: {
+            $cond: {
+              if: { $isArray: "$FK_Filtro" },
+              then: { $map: { input: "$FK_Filtro", as: "f", in: { $toInt: "$$f" } } },
+              else: {
+                $map: {
+                  input: { $split: [{ $toString: "$FK_Filtro" }, ","] },
+                  as: "f",
+                  in: {
+                    $convert: { input: { $trim: { input: "$$f" } }, to: "int", onError: null, onNull: null }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      // --- Match filters ---
+      {
+        $match: {
+          ...(tipoInt && !isNaN(tipoInt) ? { FK_Tipo: tipoInt } : {}),
+          ...(citta ? { FK_Citta: citta } : {}),
+          ...(allergieArray.length > 0 ? { FK_Filtro: { $nin: allergieArray } } : {})
+        }
+      },
+      // --- Lookups ---
+      {
+        $lookup: {
+          from: "TipoRistoranti",
+          localField: "FK_Tipo",
+          foreignField: "ID",
+          as: "TipoRistorante"
+        }
+      },
+      {
+        $lookup: {
+          from: "Citta",
+          localField: "FK_Citta",
+          foreignField: "Cap",
+          as: "Citta"
+        }
+      },
+      {
+        $lookup: {
+          from: "Filtro",
+          localField: "FK_Filtro",
+          foreignField: "ID",
+          as: "Filtro"
+        }
+      },
+      // --- Unwind for lookups ---
+      { $unwind: { path: "$TipoRistorante", preserveNullAndEmptyArrays: true } },
+      { $unwind: { path: "$Citta", preserveNullAndEmptyArrays: true } },
+      // --- Group to consolidate multiple filters ---
+      {
+        $group: {
+          _id: {
+            Nome: "$Nome",
+            Indirizzo: "$Indirizzo",
+            Tipo: "$TipoRistorante.Nome",
+            Citta: "$Citta.Nome"
           },
-        },
-        {
-          $lookup: {
-            from: "TipoRistoranti",
-            localField: "FK_Tipo",
-            foreignField: "ID",
-            as: "TipoRistorante",
-          },
-        },
-        {
-          $lookup: {
-            from: "Citta",
-            localField: "FK_Citta",
-            foreignField: "Cap",
-            as: "Citta",
-          },
-        },
-        {
-          $lookup: {
-            from: "Filtro",
-            localField: "FK_Filtro",
-            foreignField: "ID",
-            as: "Filtro",
-          },
-        },
-        { $unwind: { path: "$TipoRistorante", preserveNullAndEmptyArrays: true } },
-        { $unwind: { path: "$Citta", preserveNullAndEmptyArrays: true } },
-        {
-          $group: {
-            _id: {
-              Nome: "$Nome",
-              Indirizzo: "$Indirizzo",
-              Tipo: "$TipoRistorante.Nome",
-              Citta: "$Citta.Nome",
-            },
-            Filtri: { $addToSet: "$Filtro.Nome" },
-          },
-        },
-        {
-          $project: {
-            _id: 0,
-            Nome: "$_id.Nome",
-            Indirizzo: "$_id.Indirizzo",
-            Tipo: "$_id.Tipo",
-            Citta: "$_id.Citta",
-            Filtri: 1,
-          },
-        },
-      ])
-      .toArray();
+          Filtri: { $addToSet: "$Filtro.Nome" }
+        }
+      },
+      // --- Project final shape ---
+      {
+        $project: {
+          _id: 0,
+          Nome: "$_id.Nome",
+          Indirizzo: "$_id.Indirizzo",
+          Tipo: "$_id.Tipo",
+          Citta: "$_id.Citta",
+          Filtri: 1
+        }
+      }
+    ];
+
+    const results = await db.collection("Ristoranti").aggregate(pipeline).toArray();
+
+    console.log(`📦 Trovati ${results.length} ristoranti`);
+    if (results.length > 0) console.log("📋 Esempio risultati:", results.slice(0, 3));
 
     res.json(results);
   } catch (err) {
-    console.error("Error fetching restaurants:", err);
+    console.error("❌ Error fetching restaurants:", err);
     res.status(500).json({ error: "Errore durante la ricerca." });
   }
 });
