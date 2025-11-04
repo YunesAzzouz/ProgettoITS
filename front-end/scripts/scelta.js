@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!form) return;
 
-  // --- CAP to city name mapping ---
   const cityMap = {
     "05100": "Terni",
     "06049": "Spoleto",
@@ -16,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    // --- Get selected filters ---
     const tipoRistorante = document.querySelector('input[name="filtro"]:checked')?.value;
     const tipoRistoranteNum = tipoRistorante ? Number(tipoRistorante) : null;
 
@@ -27,14 +25,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const selectedCittaCap = document.querySelector('input[name="citta"]:checked')?.value;
     const selectedCittaName = selectedCittaCap ? cityMap[selectedCittaCap] : null;
 
-    // --- Debug: show selected filters ---
     console.log("🔍 Filtri selezionati:", {
       tipo: tipoRistoranteNum,
       citta: selectedCittaCap || null,
       allergie
     });
 
-    // --- Save preferences ---
     try {
       const savePref = await fetch("http://localhost:3000/api/preferences", {
         method: "POST",
@@ -48,22 +44,19 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // --- Build query params ---
     const queryParams = new URLSearchParams();
     if (tipoRistoranteNum) queryParams.append("tipo", tipoRistoranteNum);
     if (selectedCittaCap) queryParams.append("citta", selectedCittaCap);
     allergie.forEach(all => queryParams.append("allergie", all));
 
-    // --- Fetch restaurants ---
     try {
       const fetchRes = await fetch(`http://localhost:3000/api/restaurants?${queryParams}`);
       const restaurants = await fetchRes.json();
 
-      // --- Debug: show fetched results ---
-      console.log(`📦 Trovati ${restaurants.length} ristoranti`);
+      console.log(`Trovati ${restaurants.length} ristoranti`);
       if (restaurants.length > 0) {
         console.log(
-          "📋 Esempio risultati:",
+          "Esempio risultati:",
           restaurants.slice(0, 3).map(r => ({
             Nome: r.Nome,
             Indirizzo: r.Indirizzo,
@@ -87,7 +80,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // --- Clear filters button ---
   document.getElementById("cancellaFiltri").addEventListener("click", () => {
     document.querySelectorAll('input[name="filtro"]').forEach(el => el.checked = false);
     document.querySelectorAll('input[name="allergie"]').forEach(el => el.checked = false);
@@ -97,30 +89,35 @@ document.addEventListener("DOMContentLoaded", () => {
     alert("Filtri cancellati!");
   });
 
-  // --- Display restaurants ---
   function displayRestaurants(restaurants) {
     resultsContainer.innerHTML = "";
     resultsContainer.style.display = "grid";
 
     restaurants.forEach(r => {
-      const cityName = cityMap[r.FK_Citta] || r.Citta || "N/A"; // friendly city name
+      const cityName = cityMap[r.FK_Citta] || r.Citta || "N/A"; 
       const card = document.createElement("div");
       card.className = "restaurant-card";
 
       card.innerHTML = `
         <h4>${r.Nome}</h4>
         <p><strong>Indirizzo:</strong> ${r.Indirizzo}</p>
+        <p><strong>Telefono:</strong> ${r.telefono || 'N/A'}</p>
+        <p><strong>Sito Web:</strong> ${
+          r.url_sito
+            ? `<a href="${r.url_sito}" target="_blank">${r.url_sito}</a>`
+            : "N/A"
+        }</p>
         <p><strong>Tipo:</strong> ${r.Tipo || 'N/A'}</p>
         <p><strong>Città:</strong> ${cityName}</p>
         <p><strong>Filtri:</strong> ${r.Filtri && r.Filtri.length ? r.Filtri.join(", ") : "Nessuno"}</p>
         <button class="fav-btn" data-nome="${r.Nome}">⭐ Aggiungi ai preferiti</button>
       `;
 
+
       resultsContainer.appendChild(card);
     });
   }
 
-  // --- Event delegation for favorites ---
   resultsContainer.addEventListener("click", async (e) => {
     if (!e.target.classList.contains("fav-btn")) return;
 

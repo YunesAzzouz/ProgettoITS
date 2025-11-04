@@ -13,10 +13,10 @@
   padding: 20px;
   gap:10px;
   border-radius: 6px;
-  transition: transform 0.1s; /* Rende l'ingrandimento fluido */
+  transition: transform 0.1s; 
 }
 .filtro-container:hover {
-  transform: scale(1.02); /* Ingrandisce leggermente il contenitore al passaggio del mouse */
+  transform: scale(1.02);
 }
 
 h3{
@@ -34,8 +34,8 @@ h3{
 
 .filtro-2 {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr; /* Due colonne di larghezza uguale */
-  gap: 5px; /* Spaziatura tra righe e colonne */
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr; 
+  gap: 5px; 
 }
 
 .bottoni{
@@ -72,7 +72,7 @@ input[type="checkbox"] {
 }
 
 input[type="radio"] {
-  accent-color: rgb(100, 155, 107); /* Sostituisci con il colore che desideri */
+  accent-color: rgb(100, 155, 107); 
 }
 
 .bottoni-2:hover {
@@ -140,6 +140,3 @@ input[type="radio"] {
     width: 90%; 
   }
 }
-
-
-/**/

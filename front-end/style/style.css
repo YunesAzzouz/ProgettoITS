@@ -59,7 +59,7 @@
 }
 
 a {
-  text-decoration: none; /* Rimuove la sottolineatura di default */
+  text-decoration: none; 
   color: #60553a; 
 }
 
@@ -85,20 +85,18 @@ a :hover{
   padding: 15px;
 }
 
-/*BOTTONE*/
 .div-btn {
   display: flex;
-  justify-content: center; /* centra orizzontalmente il bottone */
-  align-items: center; /* centra verticalmente, se serve */
+  justify-content: center; 
+  align-items: center; 
   margin-top: 20px;
 }
 
-/* Stile del bottone */
 .btn {
   display: flex;
-  justify-content: center;  /* centra il testo orizzontalmente */
-  align-items: center;      /* centra il testo verticalmente */
-  text-align: center;       /* utile se il testo va su più righe */
+  justify-content: center; 
+  align-items: center;     
+  text-align: center;       
   background-color: var(--bg-forms-send);
   color: white;
   font-size: 14px;
@@ -110,12 +108,10 @@ a :hover{
   transition: background-color 0.3s ease;
 }
 
-/* Effetto hover */
 .btn:hover {
   background-color: #5b4732;
 }
 
-/*FOOTER*/
 .footer{
   display: flex;
   align-items: center;
@@ -125,8 +121,6 @@ a :hover{
   position: sticky;
 }
 
-
-/* MEDIA QUERY*/
 @media screen and (max-width:800px ){
   .presentazione{
     display: flex;
