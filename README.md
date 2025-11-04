@@ -1,100 +1,77 @@
-# Progetto Ristoranti - ProgettoITS
+## Progetto Ristoranti (ProgettoITS)
 
-Un'applicazione web per la ricerca di ristoranti che permette agli utenti di trovare ristoranti in base alle loro preferenze alimentari e restrizioni dietetiche.
+Applicazione web per cercare ristoranti in base a preferenze alimentari e restrizioni dietetiche. L'obiettivo del progetto è offrire una ricerca filtrata, gestione delle preferenze e una semplice interfaccia per la registrazione/login degli utenti.
 
-## Funzionalità
+### Funzionalità principali
 
--  **Autenticazione Utente**
-  - Registrazione nuovo utente
-  - Login utenti esistenti
-  - Gestione sicura delle password con bcrypt
+- Autenticazione utenti (registrazione e login)
+- Ricerca ristoranti con filtri (tipo, città, allergie/ingredienti da escludere)
+- Salvataggio preferenze e preferiti per utente
+- Pagina contatti per inviare messaggi al team
 
--  **Ricerca Ristoranti**
-  - Filtro per tipo di ristorante
-  - Gestione delle allergie e restrizioni alimentari
-  - Visualizzazione dettagli ristorante (nome, indirizzo, città)
+### Tecnologie
 
--  **Gestione Preferenze**
-  - Salvataggio preferenze utente
-  - Filtri per allergie
-  - Personalizzazione ricerca
+- Frontend: HTML5, CSS3, JavaScript
+- Backend: Node.js + Express
+- Database: MongoDB (Atlas o locale)
+- Sicurezza: hashing password (es. bcrypt), CORS per le richieste
 
--  **Contatti**
-  - Form di contatto
-  - Invio messaggi al supporto
+### Dipendenze
 
-##  Tecnologie Utilizzate
+Le dipendenze sono gestite in `package.json`. Per installare le dipendenze locali, esegui:
 
-- **Frontend**:
-  - HTML5
-  - CSS3
-  - JavaScript
+```powershell
+npm install
+```
 
-- **Backend**:
-  - Node.js
-  - Express.js
-  - MongoDB
-
-- **Sicurezza**:
-  - bcrypt per l'hashing delle password
-  - CORS per la sicurezza delle richieste
-
-##  Dipendenze
-
-- express: ^5.1.0
-- mongodb: ^6.17.0
-- bcrypt: ^6.0.0
-- cors: ^2.8.5
-
-##  Installazione
+### Installazione e avvio
 
 1. Clona il repository:
-   ```bash
-   git clone https://github.com/YunesAzzouz/ProgettoITS.git
-   ```
+
+```powershell
+git clone https://github.com/YunesAzzouz/ProgettoITS.git
+cd ProgettoITS
+```
 
 2. Installa le dipendenze:
-   ```bash
-   npm install
-   ```
 
-3. Avvia il server:
-   ```bash
-   npm start
-   ```
+```powershell
+npm install
+```
 
-L'applicazione sarà disponibile all'indirizzo `http://localhost:3000`.
+3. Avvia l'applicazione:
 
-##  Struttura del Progetto
+```powershell
+npm start
+```
+
+Per impostazione predefinita il server dovrebbe essere disponibile su `http://localhost:3000` (verifica il valore di porta in `server.js`).
+
+### Struttura del progetto (sintesi)
 
 ```
 ProgettoITS/
-├── server.js           # Server Express
-├── importa.js         # Script di importazione dati
-├── Input.js           # Gestione input
-├── front-end/
-│   ├── index.html     # Pagina principale
-│   ├── login.html     # Pagina di login
-│   ├── registrati.html # Pagina di registrazione
-│   ├── API.html       # Pagina API
-│   ├── contact.html   # Pagina contatti
-│   ├── scelta.html    # Pagina selezione preferenze
-│   ├── scripts/       # Script JavaScript
-│   └── style/         # Fogli di stile CSS
+├── package.json
+├── package-lock.json
+├── server.js
+├── README.md
+├── node_modules/
+└── front-end/
+    ├── index.html
+    ├── login.html
+    ├── registrati.html
+    ├── API.html
+    ├── contact.html
+    ├── scelta.html
+    ├── preferiti.html
+    ├── scripts/
+    └── style/
 ```
 
-##  Configurazione Database
+### Autori
 
-Il progetto utilizza MongoDB Atlas come database. Assicurati di configurare correttamente le credenziali nel file `server.js`.
-
-##  Autori
-
-- [YunesAzzouz](https://github.com/YunesAzzouz)
-- [GiorgiaSettimi]
-- [SimoneCerqueti]
-- [ManuelMurru]
-- [EmanueleProfili]
-
-## 📄 Licenza
-
-Questo progetto è sotto licenza ISC.
+- YunesAzzouz (repository principale)
+- Giorgia Settimi
+- Simone Cerqueti
+- Manuel Murru
+- Emanuele Profili
