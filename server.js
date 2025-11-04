@@ -2,14 +2,10 @@ const express = require("express");
 const path = require("path");
 const { MongoClient } = require("mongodb");
 const bcrypt = require("bcrypt");
-const cors = require("cors");
-const bodyParser = require("body-parser");
 
 const app = express();
 const port = 3000;
 
-app.use(cors());
-app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "front-end")));
