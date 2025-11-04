@@ -139,4 +139,22 @@ input[type="radio"] {
   .restaurant-card {
     width: 90%; 
   }
+
+  .bottoni {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .bottoni-2 {
+    font-size: 14px;
+    padding: 6px 10px;  /* più piccolo */
+    width: 80%;         /* opzionale, per adattarli allo schermo */
+    margin: 0 auto;     /* centrali */
+  }
+
+  .fav-btn {
+    height: 30px;
+    width: 120px;
+    font-size: 14px;
+  }
 }

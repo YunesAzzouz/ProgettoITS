@@ -160,4 +160,22 @@ a :hover{
     gap:20px;
     
   }
+
+  .logo-titolo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    gap: 10px; /* piccolo spazio tra logo e titolo */
+  }
+
+  .logo-titolo .logo {
+    height: 100px;
+    width: auto;
+  }
+
+  .logo-titolo .titolo {
+    height: 100px;
+    width: auto;
+  }
 }

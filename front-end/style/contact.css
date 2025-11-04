@@ -1,7 +1,8 @@
+/* --- LAYOUT GENERALE --- */
 .contact-form {
   display: flex;
   justify-content: center;
-  padding: 20px 250px;
+  padding: 20px;
 }
 
 .contact-form form {
@@ -9,65 +10,79 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  max-width: 500px; /* limita la larghezza massima */
   gap: 20px;
 }
 
-.form-controls{
-    display: flex;
-    flex-direction: column;
+/* --- INPUT E TEXTAREA --- */
+.form-controls {
+  display: flex;
+  flex-direction: column;
 }
 
-.form-controls input, textarea{
-    padding: 8px 12px;
-    border: none;
-    background-color: var(--bg-forms);
-    border-radius: 4px;
+.form-controls input,
+.form-controls textarea {
+  padding: 8px 12px;
+  border: none;
+  background-color: var(--bg-forms);
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box; /* previene overflow su mobile */
+  font-size: 16px;
 }
 
-.send-form{
-    margin-top: 20px;
-    padding: 10px 15px;
-    border: none;
-    background: var(--bg-primary-color);
-    color: white;
+/* --- BOTTONE INVIO --- */
+.send-form {
+  margin-top: 20px;
+  padding: 10px 15px;
+  border: none;
+  background: var(--bg-primary-color);
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease, opacity 0.3s ease;
 }
+
 .send-form:hover {
-    background: var(--bg-forms-send);
-    cursor: pointer;
+  background: var(--bg-forms-send);
 }
 
-.send-form{
-    margin-top: 20px;
-    padding: 10px 15px;
-    background-color: var(--bg-forms-send);
-    cursor: not-allowed;
-    opacity: 0.5;
+/* --- STATO BLOCCATO (disabilitato prima del consenso privacy) --- */
+.send-form:disabled {
+  background-color: var(--bg-forms-send);
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
-.form-checkbox{
-    display: flex;
-    gap: 15px;
+/* --- CHECKBOX E PRIVACY --- */
+.form-checkbox {
+  display: flex;
+  gap: 15px;
 }
+
 input[type="checkbox"] {
   accent-color: #f6ae06; 
 }
 
-.error-input{
-    border: 1px solid red!important;
-    animation: scalePulse 0.4s ease;
+.privacy-consent a {
+  color: #2b5d34;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* --- EFFETTO ERRORE --- */
+.error-input {
+  border: 1px solid red !important;
+  animation: scalePulse 0.4s ease;
 }
 
 @keyframes scalePulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
 }
+
+/* --- MODALE PRIVACY --- */
 .modal {
   display: none;
   position: fixed;
@@ -119,7 +134,7 @@ input[type="checkbox"] {
   line-height: 1.5;
 }
 
-#acceptPrivacyBtn {
+#acceptPrivacyContact {
   background-color: #2b5d34;
   color: white;
   border: none;
@@ -129,17 +144,29 @@ input[type="checkbox"] {
   margin-top: 20px;
 }
 
-#acceptPrivacyBtn:hover {
+#acceptPrivacyContact:hover {
   background-color: #3d7c49;
 }
 
-.privacy-link {
-  text-align: center;
-  margin-top: 20px;
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 768px) {
+  .contact-form {
+    padding: 20px 40px;
+  }
 }
 
-.privacy-link a {
-  color: #2b5d34;
-  text-decoration: underline;
-  cursor: pointer;
+@media (max-width: 480px) {
+  .contact-form {
+    padding: 15px;
+  }
+
+  .form-controls input,
+  .form-controls textarea {
+    font-size: 15px;
+  }
+
+  .modal-content {
+    width: 90%;
+    padding: 20px;
+  }
 }

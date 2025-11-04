@@ -1,73 +1,104 @@
-
+/* --- SEZIONE LOGIN --- */
 .login {
-    display: flex;
-    flex-direction: column;
-    margin-top: 10px;
-    padding: 20px 250px;
-    background: var();
-    border: none;
+  display: flex;
+  justify-content: center;
+  padding: 30px;
 }
 
-.login input {
-    margin-bottom: 15px;
-    background: var(--bg-forms);
-    opacity: 0.5;
-    border-radius: 4px;
-    border: none;
+/* Contenitore del form */
+.form_login {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px; /* limita la larghezza del form */
+  background-color: transparent;
+  gap: 15px;
 }
 
-.login button {
-    background: var(--bg-forms-send);
-    opacity: 0.5;
-    color: white;
-    padding: 7px;
-    border-radius: 4px;
-    border: none;
-}
-
-.login input button {
-    padding: 20px;
-}
-
-.login input {
-    padding: 7px;
-    border-radius: 4px;
-}
-
-.form_login{
-    display: flex;
-    flex-direction: column;
-    padding: 30px 30px;
-    margin-top: 10px;
-}
-
-.form_login label{
-    margin-top: 10px;
-
-}
-
-.form_login input{
-    background: var(--bg-forms);
-    height: 25px;
-    border: none;
-    color: black;
-}
-
-.form_login button{
-    background: var(--bg-forms-send);
-    opacity:0.5;
-    margin-top: 25px;
-    height: 30px;
-    border-radius: 2px;
-}
-
+/* --- TESTO E LINK --- */
 .passaRegistrazione {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+  text-align: center;
 }
 
 .passaRegistrazione a {
-    color: green;
-    opacity: 0.7;
+  color: #2b5d34;
+  opacity: 0.8;
+  font-weight: 600;
+}
+
+.passaRegistrazione a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* --- INPUT E LABEL --- */
+.form_login label {
+  margin-top: 8px;
+  font-weight: 500;
+  color: #333;
+}
+
+.form_login input {
+  padding: 10px 12px;
+  background: var(--bg-forms);
+  border: none;
+  border-radius: 5px;
+  color: #000;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* --- BOTTONE SUBMIT --- */
+.form_login button {
+  margin-top: 20px;
+  background: var(--bg-primary-color);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease, opacity 0.3s ease;
+}
+
+.form_login button:hover {
+  background: var(--bg-forms-send);
+}
+
+/* Stato disabilitato (opzionale se previsto nel JS) */
+.form_login button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* --- EFFETTO ERRORE INPUT --- */
+.error-input {
+  border: 1px solid red !important;
+  animation: scalePulse 0.4s ease;
+}
+
+@keyframes scalePulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 768px) {
+  .login {
+    padding: 20px 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login {
+    padding: 15px;
+  }
+
+  .form_login input {
+    font-size: 15px;
+  }
 }
