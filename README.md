@@ -13,8 +13,8 @@ Applicazione web per cercare ristoranti in base a preferenze alimentari e restri
 
 - Frontend: HTML5, CSS3, JavaScript
 - Backend: Node.js + Express
-- Database: MongoDB (Atlas o locale)
-- Sicurezza: hashing password (es. bcrypt), CORS per le richieste
+- Database: MongoDB 
+- Sicurezza: hashing password (bcrypt)
 
 ### Dipendenze
 
@@ -45,7 +45,7 @@ npm install
 npm start
 ```
 
-Per impostazione predefinita il server dovrebbe essere disponibile su `http://localhost:3000` (verifica il valore di porta in `server.js`).
+Per impostazione predefinita il server dovrebbe essere disponibile su `http://localhost:3000`.
 
 ### Struttura del progetto (sintesi)
 
