@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Previsioni Meteo – Umbria</title>
+  <link rel="stylesheet" href="style/API.css">
+  <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Previsioni Meteo – Umbria</h1>
+
+    <div class="city-select">
+      <label for="city"><strong>Seleziona una città:</strong></label>
+      <select id="city">
+        <option value="Terni" selected>Terni</option>
+        <option value="Perugia">Perugia</option>
+        <option value="Spoleto">Spoleto</option>
+        <option value="Assisi">Assisi</option>
+        <option value="Todi">Todi</option>
+      </select>
+    </div>
+
+    <div id="forecast" class="forecast-container"></div>
+  </div>
+
+  <div class="bottoni">
+    <button class="bottoni-2" onclick="window.location.href='scelta.html';">
+      Torna alla selezione ristoranti
+    </button>
+  </div>
+
+  <script src="scripts/api.js"></script>
+
+</body>
+</html>

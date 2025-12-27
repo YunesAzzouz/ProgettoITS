@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking Restaurant</title>
+
+  <link rel="stylesheet" href="style/style.css" />
+  <link rel="stylesheet" href="style/home.css">
+  <link rel="icon" type="image/x-icon" href="img/logo.png" />
+</head>
+
+<body>
+  <section class="navbar">
+    <div class="logo-titolo">
+      <div class="logo">
+        <a href="index.html">
+          <img class="logo" src="img/logo.png" alt="Logo" />
+        </a>
+      </div>
+      <img class="titolo" src="img/Umbria_food_finder.png">
+    </div>
+
+    <button class="menu-toggle" onclick="toggleMenu()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+        <line x1="3" y1="12" x2="21" y2="12" />
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <line x1="3" y1="18" x2="21" y2="18" />
+      </svg>
+    </button>
+
+    <div class="nav-links">
+      <a class="active" href="index.html">Home</a>
+      <a href="contact.html">Contattaci</a>
+      <a id="login-link" href="login.html">Login</a>
+      <a id="register-link" href="registrati.html">Registrati</a>
+      <a href="preferiti.html">Preferiti</a>
+    </div>
+
+  </section>
+
+  <div class="hero">
+    <h1>Fatti guidare da noi alla ricerca del miglior ristorante per te</h1>
+  </div>
+
+  <div class="presentazione">
+    <div class="intro">
+      <h1>Chi siamo:</h1>
+      <p>
+        Benvenuti nel sito ufficiale per la ricerca del ristorante che cerchi,
+        soddisfacendo al meglio tutte le tue richieste, escludendo le tue allergie e intolleranze per assicurarti una
+        bella ma soprattutto sicura esperienza.
+      </p>
+    </div>
+
+    <div class="intro">
+      <h1>La nostra iniziativa:</h1>
+      <p>
+        Trova e scegli tra tanti ristoranti dell'Umbria,
+        in pochi e semplici passaggi. Dalle pizzerie tradizionali ai ristoranti gourmet,
+        abbiamo coperto ogni esigenza.
+        Il tuo prossimo pranzo o cena è a un click di distanza.
+      </p>
+    </div>
+  </div>
+
+  <div class="div-btn">
+    <button class="btn" onclick="window.location.href='scelta.html';">Clicca qui per iniziare!</button>
+  </div>
+
+  <div class="push"></div>
+
+  <script src="scripts/navbar.js"></script>
+
+</body>
+
+</html>

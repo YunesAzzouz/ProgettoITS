@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registrati</title>
+  <link rel="stylesheet" href="style/style.css" />
+  <link rel="stylesheet" href="style/registrati.css" />
+  <link rel="icon" type="image/x-icon" href="img/logo.jpeg" />
+</head>
+<body>
+
+  <section class="navbar">
+    <div class="logo-titolo">
+      <div class="logo">
+        <a href="index.html">
+        <img class="logo" src="img/logo.png" alt="Logo" />
+        </a>
+      </div>
+      <img  class="titolo" src="img/Umbria_food_finder.png">
+    </div>
+
+    <button class="menu-toggle" onclick="toggleMenu()">
+      <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="feather feather-menu"
+      >
+      <line x1="3" y1="12" x2="21" y2="12" />
+      <line x1="3" y1="6" x2="21" y2="6" />
+      <line x1="3" y1="18" x2="21" y2="18" />
+      </svg>
+    </button>
+
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="contact.html">Contattaci</a>
+      <a id="login-link" href="login.html">Login</a>
+      <a class="active" id="register-link" href="registrati.html">Registrati</a>
+      <a href="preferiti.html">Preferiti</a>
+    </div>
+
+
+    
+  </section> 
+
+  <div class="passaLogin">
+    <h3>
+      Se hai già un account vai al <a href="login.html">Login</a></h3>
+  </div>
+  <section class="registrati">
+    <form class="form_registrati" id="registrationForm">
+      <label>Nome</label>
+      <input type="text" name="name" id="nome_registrati" placeholder="Nome" required />
+
+      <label>Cognome</label>
+      <input type="text" name="cognome" id="cognome_registrati" placeholder="Cognome" required />
+
+      <label>E-mail</label>
+      <input type="email" name="email" id="mail_registrati" placeholder="latuaemail@gmail.com" required />
+
+      <label>Password</label>
+      <input type="password" name="password" id="password_registrati" placeholder="password" required />
+
+      <button type="submit">Registrati</button>
+    </form>
+  </section>
+
+  <script src="scripts/registrazione.js"></script>
+  <script src="scripts/navbar.js"></script>
+</body>
+</html>
